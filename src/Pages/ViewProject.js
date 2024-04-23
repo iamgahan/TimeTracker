@@ -61,3 +61,7 @@ export default ViewProject;
 //         "endTime": "2024-04-17T06:59:12.752Z"
 //     }
 // ]
+
+// git add .
+// git commit -m "Message"
+// git push origin branch

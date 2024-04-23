@@ -5,7 +5,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { CiCirclePlus } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
-
+// import { v4 as uuidv4 } from 'uuid';
 
 
 const options = [
@@ -67,7 +67,7 @@ function Projects() {
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
     setProject(projects);
   }, []);
-
+  console.log("this is the modal",modal)
   return (
     <div className="FullScreen w-full  space-y-8 h-full mx-7">
       <div className=" flex justify-end w-full pt-5">
@@ -131,17 +131,28 @@ function Projects() {
           <tbody className="bg-white  " >
             {project.filter((project) => project.projectName.includes(search)).map((item,index) => (
               // <tr key={item.project} className="border font-sans h-12 text-sm text-gray-600 "> 
-              <tr className="w-8/12 text-[#07a7b3] font-sans text-sm">
+              <tr className="w-8/12 text-[#07a7b3] font-sans  text-sm">
                 <td className="text-[#07a7b3] pl-5" onClick={handleClick2}><li>{item.projectName}</li></td>
                 <td>{item.firstDropdown.label}</td>
                 <td>{item.hoursConsumed}</td>
                 <td>Yes</td>
-                <td className="relative"  onClick={()=>openModal(index)}><SlOptionsVertical/>
-                  {modal === index &&<div  className="absolute h-20 w-20 z-20 bg-white border border-green-500">
-                  <div className = "hover:bg-slate-400" onClick = {handleEdit}>
+                <td className="relative"  >
+                  <SlOptionsVertical onClick={()=>{
+                
+                openModal(index)}} />
+                  {modal === index&&<div className="absolute h-20 w-20 z-20 bg-white border border-green-500">
+                  <div className = "hover:bg-slate-400" onClick = {(e)=>{ 
+                    //  e.stopPropagation()
+                    console.log("inside the edit")
+                    setModal(null)
+                  }}>
                     Edit
                   </div>
-                  <div  className="hover:bg-red-400" onClick={handleDelete}>
+                  <div  className="hover:bg-red-400" onClick={(e)=>{
+                    // e.stopPropagation()
+                    console.log("inside the delete")
+                    setModal(null)
+                  }}>
                     Delete
                   </div>
 

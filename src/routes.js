@@ -12,6 +12,7 @@ import { Children, useEffect } from "react";
 import Layout from "./components/Layout";
 import ProjectForm from "./Pages/ProjectForm.js";
 import ViewProject from "./Pages/ViewProject.js";
+import EditProjectForm from "./Pages/EditProjectForm.js";
 
 const PrivateRoute = ({ token }) => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function Routers(props) {
         <Route path="/projects" element={<Layout element={Projects} />} />
         <Route path="/projectForm" element={<Layout element={ProjectForm} />} />
         <Route path="/viewProject" element={<Layout element={ViewProject} />} />
-
+        <Route path="/editProjectForm" element={<Layout element={EditProjectForm} />} />
         <Route path="/screenshots" element={<Layout element={Screenshots} />} />
         <Route path="/clients" element={<Layout element={Clients} />} />
         <Route path="/employees" element={<Layout element={Employees} />} />
