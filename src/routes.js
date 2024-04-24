@@ -26,7 +26,7 @@ const PrivateRoute = ({ token }) => {
       navigate("/dashboard");
     }
   }, [token]);
-  if (token) return <Outlet />;
+  if (token) return <Outlet/>;
   return null;
 };
 
@@ -41,7 +41,7 @@ function Routers(props) {
         <Route path="/projects" element={<Layout element={Projects} />} />
         <Route path="/projectForm" element={<Layout element={ProjectForm} />} />
         <Route path="/viewProject" element={<Layout element={ViewProject} />} />
-        <Route path="/editProjectForm" element={<Layout element={EditProjectForm} />} />
+        <Route path="/editProjectForm/:index" element={<Layout element={EditProjectForm} />} />
         <Route path="/screenshots" element={<Layout element={Screenshots} />} />
         <Route path="/clients" element={<Layout element={Clients} />} />
         <Route path="/employees" element={<Layout element={Employees} />} />

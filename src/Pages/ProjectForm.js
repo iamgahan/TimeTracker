@@ -19,9 +19,10 @@ const options2 = [
 ];
 
 function ProjectForm() {
+    const navigate = useNavigate();
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const { register, reset, handleSubmit, setValue, getValues, control} = useForm()
-    console.log("register", register);
+    const { register, reset, handleSubmit, setValue, getValues, control } = useForm()
+    // console.log("register", register);
 
     const handleChange = (selectedOption) => {
         console.log({ selectedOption })
@@ -49,15 +50,15 @@ function ProjectForm() {
         } else {
             localStorage.setItem('projects', JSON.stringify([{ ...data }]))
         }
+        navigate("/projects")
     }
-    const navigate = useNavigate();
 
     const handleClick = () => {
         // Navigate to another page
         navigate('/projects');
     }
     const handleReset = () => {
-        console.log("reserererere", )
+        console.log("reserererere",)
         reset();
     }
 
@@ -71,13 +72,13 @@ function ProjectForm() {
                             <Controller
                                 render={({ field }) => (
                                     <input
-                                    {...field}
-                                    // name='projectName'
+                                        {...field}
+                                        // name='projectName'
                                         className="pl-2 border-2 w-4/12 h-10" placeholder="Project Name"
-                                        // value={getValuefield.value}
-                                        // onChange={field.onChange}
-                                        // inputRef={field.ref}
-                                        // defaultValue=""
+                                    // value={getValuefield.value}
+                                    // onChange={field.onChange}
+                                    // inputRef={field.ref}
+                                    // defaultValue=""
                                     />
                                 )}
                                 name="projectName"
@@ -115,13 +116,21 @@ function ProjectForm() {
 
                             />
                         </div>
-                        <div className="w-4/12"><Controller render={({ field }) => (<input className="pl-2 border-2 h-10 w-full" placeholder="Technology" value={field.value} onChange={field.onChange} inputRef={field.ref} />)} name="technology" control={control} rules={{ required: true, maxLength: 20 }} />  </div>
-                        <div className="w-4/12"> <Controller render={({field}) => (<input className="pl-2 border-2 h-10 w-full" type="number" placeholder="Hours Allotted" value={field.value} onChange={field.onChange} inputRef={field.ref}/>)} name = "hoursAllotted" control={control} rules={{required:true, maxLength: 20}} /></div>
+                        <div className="w-4/12"><Controller render={({ field }) => (<input className="pl-2 border-2 h-10 w-full" placeholder="Technology" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="technology" control={control} rules={{ required: true, maxLength: 20 }} />  </div>
+                        <div className="w-4/12"> <Controller render={({ field }) => (<input className="pl-2 border-2 h-10 w-full" type="number" placeholder="Hours Allotted" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="hoursAllotted" control={control} rules={{ required: true, maxLength: 20 }} /></div>
                         <div className="flex w-full ">
-                            <div className=""> <Controller render={({field}) => (<input placeholder="Hours Consumed" className="border-2 pl-2 h-10 w-11/12" type="number"  value={field.value} onChange={field.onChange} inputRef={field.ref}/>)} name="hoursConsumed" control={control} rules={{required:true, pattern: /^[0-9]+$/}}/></div>
-                            <div className=" ml-2"> <Controller render={({field}) => (<input placeholder="Hours Left" className="border-2 pl-2 h-10 w-11/12 ml-2" type="number" value={field.value} onChange={field.onChange} inputRef={field.ref}/>)} name="hoursLeft" control={control} rules={{required:true, pattern: /^[0-9]+$/}}/></div>
+                            <div className=""> <Controller render={({ field }) => (<input placeholder="Hours Consumed" className="border-2 pl-2 h-10 w-11/12" type="number" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="hoursConsumed" control={control} rules={{ required: true, pattern: /^[0-9]+$/ }} /></div>
+                            <div className=" ml-2"> <Controller render={({ field }) => (<input placeholder="Hours Left" className="border-2 pl-2 h-10 w-11/12 ml-2" type="number" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="hoursLeft" control={control} rules={{ required: true, pattern: /^[0-9]+$/ }} /></div>
                         </div>
-                        <div className="w-full"><input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description"></input></div>
+                        <div className="w-full"><Controller render={({ field }) => (<input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description" value={field.value} onChange={field.onChange} inputRef={field.ref}></input>)} name="description" control={control} rules={{
+                            required: {
+                                value: true,
+                                message: "Please provide description"
+                            }, maxLength: { value: 20, message: "exceeding max length" }
+                        }} /> </div>
+
+                        {/* <div className="w-full"><input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description"></input></div> */}
+                        {/* <div className="w-full"><Controller render={({field}) => (<input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description" value={field.value} onChange={field.onChange} inputRef={field.ref}></input>)}  name="description" control={control} rules={{ required: true, maxLength: { value:20, message:"exceeding max length"} }} /> </div> */}
                         <div className="flex">
                             Assigned Team
                             <div className=" ml-8 w-2/5 h-10">
@@ -145,7 +154,7 @@ function ProjectForm() {
                     </div>
                 </div>
                 <div className="w-full flex justify-end pt-3">
-                    <button type="reset" className="bg-[#07a7b3] w-1/12 h-8 text-white" onClick={()=>handleReset()} >RESET</button>
+                    <button type="reset" className="bg-[#07a7b3] w-1/12 h-8 text-white" onClick={() => handleReset()} >RESET</button>
                     <button type="submit" className="bg-[#07a7b3] w-1/12 h-8 text-white">SAVE</button>
                 </div>
             </form>

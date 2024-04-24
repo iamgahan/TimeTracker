@@ -3,8 +3,9 @@ import Select from "react-select";
 import { TbArrowsSort } from "react-icons/tb";
 import { SlOptionsVertical } from "react-icons/sl";
 import { CiCirclePlus } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import EditProjectForm from "./EditProjectForm";
+import { useParams } from "react-router-dom";
 // import { v4 as uuidv4 } from 'uuid';
 
 
@@ -25,12 +26,14 @@ const options2 = [
 // ];
 
 function Projects() {
-  const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const [modal,setModal] = useState(null)
+  const [search, setSearch] = useState("");
+  const [modal, setModal] = useState(null);
 
-  const openModal = (index) =>{
+
+  const openModal = (index) => {
     setModal(index)
+    console.log('index= ', index)
   }
 
 
@@ -45,21 +48,22 @@ function Projects() {
   let filteredProjects = []
   const handleSearch = () => {
     console.log("projectssssssss", project)
-     filteredProjects = project.filter((project) => project.projectName.includes(search))
-     console.log(filteredProjects)
+    filteredProjects = project.filter((project) => project.projectName.includes(search))
+    console.log(filteredProjects)
   }
 
 
-  console.log("modal",modal)
+  console.log("modal", modal)
   const handleDelete = () => {
     console.log("asdjf")
     setModal(null)
   }
-  const handleEdit = () => {
-    console.log("edit")
-
-    setModal(null)
+  const handleEdit = (index) => {
+    // setModal(null)
   
+    console.log("edit");
+    console.log("index")
+    navigate(`/editProjectForm/${index}`, {state:{index:modal}})
   }
   const [project, setProject] = useState([]);
 
@@ -67,7 +71,10 @@ function Projects() {
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
     setProject(projects);
   }, []);
-  console.log("this is the modal",modal)
+
+  
+  console.log("this is the modal", modal)
+
   return (
     <div className="FullScreen w-full  space-y-8 h-full mx-7">
       <div className=" flex justify-end w-full pt-5">
@@ -129,7 +136,7 @@ function Projects() {
             </tr>
           </thead>
           <tbody className="bg-white  " >
-            {project.filter((project) => project.projectName.includes(search)).map((item,index) => (
+            {project.filter((project) => project.projectName.includes(search)).map((item, index) => (
               // <tr key={item.project} className="border font-sans h-12 text-sm text-gray-600 "> 
               <tr className="w-8/12 text-[#07a7b3] font-sans  text-sm">
                 <td className="text-[#07a7b3] pl-5" onClick={handleClick2}><li>{item.projectName}</li></td>
@@ -137,33 +144,26 @@ function Projects() {
                 <td>{item.hoursConsumed}</td>
                 <td>Yes</td>
                 <td className="relative"  >
-                  <SlOptionsVertical onClick={()=>{
-                
-                openModal(index)}} />
-                  {modal === index&&<div className="absolute h-20 w-20 z-20 bg-white border border-green-500">
-                  <div className = "hover:bg-slate-400" onClick = {(e)=>{ 
-                    //  e.stopPropagation()
-                    console.log("inside the edit")
-                    setModal(null)
-                  }}>
-                    Edit
-                  </div>
-                  <div  className="hover:bg-red-400" onClick={(e)=>{
-                    // e.stopPropagation()
-                    console.log("inside the delete")
-                    setModal(null)
-                  }}>
-                    Delete
-                  </div>
+                  <SlOptionsVertical onClick={() => { openModal(index) }}/>
+                  {modal === index && (
+                    <div className="absolute h-20 w-20 z-20 bg-white border border-green-500">
+               
+                      <div className="hover:bg-slate-400" onClick={()=>handleEdit(index)}>
+                        Edit
+                      </div>
+                    
+                    <div className="hover:bg-red-400" onClick={handleDelete}>
+                      Delete
+                    </div>
 
                   </div>
- }
+                  )}
                 </td>
               </tr>
             ))}
 
 
-           
+
           </tbody>
         </table>
       </div>
