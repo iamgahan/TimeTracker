@@ -21,14 +21,13 @@ const options2 = [
 function ProjectForm() {
     const navigate = useNavigate();
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const { register, reset, handleSubmit, setValue, getValues, control } = useForm()
+    const { register, reset, handleSubmit, setValue, getValues, control, formState: { errors } } = useForm()
     // console.log("register", register);
 
     const handleChange = (selectedOption) => {
         console.log({ selectedOption })
         if (Array.isArray(selectedOption)) {
-
-            setValue("secondDropdown", selectedOption.map((e => e.value)))
+            setValue("secondDropdown", selectedOption.map((e => e)))
         } else {
 
             setValue("firstDropdown", selectedOption)
@@ -52,6 +51,7 @@ function ProjectForm() {
         }
         navigate("/projects")
     }
+
 
     const handleClick = () => {
         // Navigate to another page
@@ -83,8 +83,15 @@ function ProjectForm() {
                                 )}
                                 name="projectName"
                                 control={control}
-                                rules={{ required: true, maxLength: 20 }}
+                                rules={{ required: true, maxLength: {
+                                    value: 20,
+                                    message: "exceeding max length"
+                                } }}
+
                             />
+                            {errors?.projectName && (
+                                <p style={{ color: 'red' }}>{errors?.projectName?.message}</p>
+                            )}
                             {/* <input
                                     name='projectName'
                                         className="pl-2 border-2 w-4/12 h-10" placeholder="Project Name"
@@ -116,7 +123,9 @@ function ProjectForm() {
 
                             />
                         </div>
-                        <div className="w-4/12"><Controller render={({ field }) => (<input className="pl-2 border-2 h-10 w-full" placeholder="Technology" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="technology" control={control} rules={{ required: true, maxLength: 20 }} />  </div>
+                        <div className="w-4/12"><Controller render={({ field }) => (<input className="pl-2 border-2 h-10 w-full" placeholder="Technology" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="technology" control={control} rules={{ required: true, maxLength: { value: 20, message: "exceeding max length" } }} />  {errors?.technology && (
+                                <p style={{ color: 'red' }}>{errors?.technology?.message}</p>
+                            )} </div>
                         <div className="w-4/12"> <Controller render={({ field }) => (<input className="pl-2 border-2 h-10 w-full" type="number" placeholder="Hours Allotted" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="hoursAllotted" control={control} rules={{ required: true, maxLength: 20 }} /></div>
                         <div className="flex w-full ">
                             <div className=""> <Controller render={({ field }) => (<input placeholder="Hours Consumed" className="border-2 pl-2 h-10 w-11/12" type="number" value={field.value} onChange={field.onChange} ref={field.ref} />)} name="hoursConsumed" control={control} rules={{ required: true, pattern: /^[0-9]+$/ }} /></div>
@@ -127,7 +136,9 @@ function ProjectForm() {
                                 value: true,
                                 message: "Please provide description"
                             }, maxLength: { value: 20, message: "exceeding max length" }
-                        }} /> </div>
+                        }} /> {errors?.description && (
+                            <p style={{ color: 'red' }}>{errors?.description?.message}</p>
+                        )} </div>
 
                         {/* <div className="w-full"><input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description"></input></div> */}
                         {/* <div className="w-full"><Controller render={({field}) => (<input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description" value={field.value} onChange={field.onChange} inputRef={field.ref}></input>)}  name="description" control={control} rules={{ required: true, maxLength: { value:20, message:"exceeding max length"} }} /> </div> */}

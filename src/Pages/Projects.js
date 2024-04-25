@@ -51,13 +51,27 @@ function Projects() {
     filteredProjects = project.filter((project) => project.projectName.includes(search))
     console.log(filteredProjects)
   }
-
-
   console.log("modal", modal)
-  const handleDelete = () => {
-    console.log("asdjf")
-    setModal(null)
-  }
+
+
+  // const handleDelete = () => {
+  //   console.log("asdjf")
+  //   setModal(null)
+  // }
+
+  const handleDelete = (index) => {
+    // Create a copy of the projects array
+    const updatedProjects = [...project];
+    // Remove the project at the specified index
+    updatedProjects.splice(index, 1);
+    // Update the state with the modified projects array
+    setProject(updatedProjects);
+    // Update the local storage with the modified projects array
+    localStorage.setItem("projects", JSON.stringify(updatedProjects));
+    // Close the modal
+    setModal(null);
+  };
+
   const handleEdit = (index) => {
     // setModal(null)
   
@@ -72,7 +86,6 @@ function Projects() {
     setProject(projects);
   }, []);
 
-  
   console.log("this is the modal", modal)
 
   return (

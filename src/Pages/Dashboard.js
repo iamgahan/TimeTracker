@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [hours, setHours] = useState(0);
   const [labels, setLabels] = useState([]);
   const [durationsArray, setDurationsArray] = useState([]);
-  
+
   useEffect(() => {
     const timeEntries = JSON.parse(localStorage.getItem("TimeEnteries")) || [];
     const res = timeEntries.reduce((accumulator, currentValue) => accumulator + currentValue.duration,
@@ -17,7 +17,7 @@ const Dashboard = () => {
     const finalDuration = timeEntries.map(entry => entry.duration);
     setDurationsArray(finalDuration);
     console.log("durationssssssssss", finalDuration)
-  
+
 
     const datesArray = timeEntries?.map((item) => {
       const dateString = item.endTime.substring(0, 10);
@@ -42,13 +42,6 @@ const Dashboard = () => {
     // console.log('datesArray = ', x)
   }, [])
 
-  const formatDuration = (duration) => {
-    const hours = Math.floor(duration / 3600);
-    const minutes = Math.floor((duration % 3600) / 60);
-    const seconds = duration % 60;
-
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-};
 
   const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
@@ -74,6 +67,22 @@ const Dashboard = () => {
   //   const subArray 
   // }
 
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function (value) {
+            console.log('durationsArray = ',durationsArray)
+            console.log('value = ',value)
+            const hours = Math.round(value / 3600);
+            console.log('hours = ',hours)
+            return `${hours}h`;
+          },
+        },
+      },
+    },
+  };
   return (
     <div className="chartContainer px-10">
       <div className="text-left w-full mb-10 font-semibold text-l text-gray-600">
@@ -95,6 +104,7 @@ const Dashboard = () => {
               },
             ],
           }}
+          options={options}
         />
       </div>
     </div>
@@ -102,6 +112,8 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
 
 
 
