@@ -26,6 +26,7 @@ const Dashboard = () => {
       return dateObject.toLocaleString('en-US', parts);
     });
     const labels = new Set(datesArray);
+    console.log(labels)
     setLabels([...labels])
     // const datesArray = timeEntries?.map((item, idx) => item.endTime.substring(0, 10))
     // console.log('datesArray = ', datesArray)
@@ -67,22 +68,24 @@ const Dashboard = () => {
   //   const subArray 
   // }
 
-  const options = {
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          callback: function (value) {
-            console.log('durationsArray = ',durationsArray)
-            console.log('value = ',value)
-            const hours = Math.round(value / 3600);
-            console.log('hours = ',hours)
-            return `${hours}h`;
-          },
-        },
-      },
-    },
-  };
+  // const options = {
+  //   scales: {
+  //     y: {
+  //       beginAtZero: true,
+  //       ticks: {
+  //         callback: function (value) {
+  //           console.log('durationsArray = ',durationsArray)
+  //           console.log("gyhj",durationsArray,value)
+  //           console.log('value = ',value)
+  //           const hours = Math.round(value / 3600);
+  //           console.log('hours = ',hours)
+  //           return `${hours}h`;
+  //         },
+  //       },
+  //     },
+  //   },
+  // };
+  console.log(durationsArray)
   return (
     <div className="chartContainer px-10">
       <div className="text-left w-full mb-10 font-semibold text-l text-gray-600">
@@ -99,12 +102,12 @@ const Dashboard = () => {
             datasets: [
               {
                 label: "Hours",
-                data: [...durationsArray],
+                data: [... new Array(12)].map((i,ind)=>ind+1),
                 backgroundColor: ["#00a8b2"],
               },
             ],
           }}
-          options={options}
+          // options={options}
         />
       </div>
     </div>

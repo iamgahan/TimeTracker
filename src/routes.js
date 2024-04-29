@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useNavigate } from "react-router-dom";
+import { Outlet, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Projects from "./Pages/Projects";
@@ -16,6 +16,7 @@ import EditProjectForm from "./Pages/EditProjectForm.js";
 
 const PrivateRoute = ({ token }) => {
   const navigate = useNavigate();
+  const path = useLocation()
 
   useEffect(() => {
     if (!token) {
@@ -23,7 +24,7 @@ const PrivateRoute = ({ token }) => {
       navigate("/");
     } else {
       console.log("Token, no need to go to login");
-      navigate("/dashboard");
+      navigate(path.pathname);
     }
   }, [token]);
   if (token) return <Outlet/>;
