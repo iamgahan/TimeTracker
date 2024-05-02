@@ -64,7 +64,7 @@ function Login(props) {
           <input
             className="passContainer bg-[#f2f2f2] px-2 py-2"
             type="password"
-            // value={password}
+            
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             name=""
@@ -89,7 +89,7 @@ function Login(props) {
           <button
             className="submitBtn bg-teal-500 w-full  text-white rounded-md "
             type="submit"
-            // onClick={handleLogin}
+            
           >
             LOGIN
           </button>

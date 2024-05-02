@@ -53,13 +53,3 @@ function Routers(props) {
 
 export default Routers;
 
-// return (
-//   <>
-//     <Router>
-//       <Navbar />
-//       <switch>
-//         <Route path="/dashboard" />
-//       </switch>
-//     </Router>
-//   </>
-// );

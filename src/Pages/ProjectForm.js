@@ -32,14 +32,7 @@ function ProjectForm() {
 
             setValue("firstDropdown", selectedOption)
         }
-        // setSelectedOptions(selectedOption);
-
     };
-
-    // const handleDeselect = (value) => {
-    //     const updatedValues = selectedValues.filter((val) => val !== value);
-    //     setSelectedValues(updatedValues)
-    // };
     const onSubmit = (data) => {
         console.log("data", data)
         const projects = JSON.parse(localStorage.getItem('projects')) || [];
@@ -68,17 +61,11 @@ function ProjectForm() {
                 <div className="w-full h-full bg-white">
                     <div className="form   space-y-10 p-5">
                         <div className="">
-                            {/* <input className="pl-2 border-2 w-4/12 h-10" placeholder="Project Name" {...register("projectName", { required: true, maxLength: 20 })}/> */}
                             <Controller
                                 render={({ field }) => (
                                     <input
                                         {...field}
-                                        // name='projectName'
                                         className="pl-2 border-2 w-4/12 h-10" placeholder="Project Name"
-                                    // value={getValuefield.value}
-                                    // onChange={field.onChange}
-                                    // inputRef={field.ref}
-                                    // defaultValue=""
                                     />
                                 )}
                                 name="projectName"
@@ -92,22 +79,10 @@ function ProjectForm() {
                             {errors?.projectName && (
                                 <p style={{ color: 'red' }}>{errors?.projectName?.message}</p>
                             )}
-                            {/* <input
-                                    name='projectName'
-                                        className="pl-2 border-2 w-4/12 h-10" placeholder="Project Name"
-                                        // value={getValuefield.value}
-                                        value={getValues('projectName')}
-                                        onChange={(e) => setValue('projectName', e.target.values)}
-                                        // onChange={field.onChange}
-                                        // inputRef={field.ref}
-                                        // defaultValue=""
-                                    /> */}
-
                         </div>
                         <div className="w-4/12">
                             <Select
                                 {...register("firstDropdown")}
-                                // onChange={console.log}
                                 options={options}
                                 placeholder="Client"
                                 name='firstDropdown'
@@ -139,20 +114,10 @@ function ProjectForm() {
                         }} /> {errors?.description && (
                             <p style={{ color: 'red' }}>{errors?.description?.message}</p>
                         )} </div>
-
-                        {/* <div className="w-full"><input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description"></input></div> */}
-                        {/* <div className="w-full"><Controller render={({field}) => (<input className="pl-2 border-2 w-3/4 h-24 pb-20 pt-2" placeholder="Description" value={field.value} onChange={field.onChange} inputRef={field.ref}></input>)}  name="description" control={control} rules={{ required: true, maxLength: { value:20, message:"exceeding max length"} }} /> </div> */}
                         <div className="flex">
                             Assigned Team
                             <div className=" ml-8 w-2/5 h-10">
-                                {/* <select id="options3">
-                                    <options value="option1" > Developer</options>
-                                    <options value="option2" > Marketing</options>
-                                    <options value="option3" > HR</options>
-                                    <options value="option4" > Tester</options>
-                                </select>
-                                 */}
-                                <Select
+                                    <Select
                                     {...register("secondDropdown")}
                                     options={options2}
                                     value={getValues("secondDropdown")}

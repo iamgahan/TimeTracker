@@ -16,14 +16,7 @@ const options = [
 ];
 const options2 = [
   { value: "Airtel", label: "Airtel" },
-  // { value: " Nokia", label: "Nokia" },
-  // { value: " Ericson", label: "Ericson" },
 ];
-// const data = [
-//   { project: 'Donna may travel', client: 'No client', hours: 30, acctimeEntriesess: 'yes'},
-//   { project: 'Ebay mockup', client: 'No client', hours: 25, access: 'yes' },
-//   { project: 'Nethues Internal', client: 'No client', hours: 40, access: 'yes' }
-// ];
 
 function Projects() {
   const navigate = useNavigate();
@@ -53,12 +46,6 @@ function Projects() {
   }
   console.log("modal", modal)
 
-
-  // const handleDelete = () => {
-  //   console.log("asdjf")
-  //   setModal(null)
-  // }
-
   const handleDelete = (index) => {
     // Create a copy of the projects array
     const updatedProjects = [...project];
@@ -72,9 +59,7 @@ function Projects() {
     setModal(null);
   };
 
-  const handleEdit = (index) => {
-    // setModal(null)
-  
+  const handleEdit = (index) => {  
     console.log("edit");
     console.log("index")
     navigate(`/editProjectForm/${index}`, {state:{index:modal}})

@@ -28,19 +28,6 @@ const Dashboard = () => {
     const labels = new Set(datesArray);
     console.log(labels)
     setLabels([...labels])
-    // const datesArray = timeEntries?.map((item, idx) => item.endTime.substring(0, 10))
-    // console.log('datesArray = ', datesArray)
-    // const x = new Set(datesArray);
-
-    // formating date for the y-axis graph
-    //   const currentDate = datesArray;
-    //   const formattedDate = datesArray.map(dateString => {
-    //     const dateObject = new Date(dateString);
-    //     const options = { weekday: 'short', day: '2-digit', month: 'short' };
-    //     return dateObject.toLocaleString('en-US', options);
-    // });
-    // console.log("Check Date",formattedDate);
-    // console.log('datesArray = ', x)
   }, [])
 
 
@@ -64,27 +51,6 @@ const Dashboard = () => {
     );
   };
   console.log('totalHours = ', totalHours)
-  // for (let i = 0; i < Array.length; i++){
-  //   const subArray 
-  // }
-
-  // const options = {
-  //   scales: {
-  //     y: {
-  //       beginAtZero: true,
-  //       ticks: {
-  //         callback: function (value) {
-  //           console.log('durationsArray = ',durationsArray)
-  //           console.log("gyhj",durationsArray,value)
-  //           console.log('value = ',value)
-  //           const hours = Math.round(value / 3600);
-  //           console.log('hours = ',hours)
-  //           return `${hours}h`;
-  //         },
-  //       },
-  //     },
-  //   },
-  // };
   console.log(durationsArray)
   return (
     <div className="chartContainer px-10">
@@ -107,7 +73,6 @@ const Dashboard = () => {
               },
             ],
           }}
-          // options={options}
         />
       </div>
     </div>

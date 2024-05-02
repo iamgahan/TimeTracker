@@ -68,8 +68,6 @@ const options = [
 ];
 
 
-
-// const parts = { year: 'numeric', month: '2-digit', day: '2-digit' };
 function TimeTracker() {
   const [time, setTime] = useState(0);
   const [data, setData] = useState({});
@@ -134,8 +132,6 @@ function TimeTracker() {
     const updatedEntries = [...storeData];
     updatedEntries.splice(index, 1);
     setStoreData(updatedEntries);
-    // setTasks(updatedEntries)
-    // console.log("updated entries", updatedEntries)
     localStorage.setItem('TimeEnteries', JSON.stringify(updatedEntries));
   };
 
@@ -203,8 +199,6 @@ function TimeTracker() {
       {storeData && <div className="1st Table py-10">
 
         {tasks?.map((entries, index) => {
-          // console.log("arr = ",arr)
-          // const formattedDate =  entries[idx]
           console.log('entries  =  ',entries[0]?.endTime)
           const currentDate = new Date(entries[0]?.endTime);
           const parts = { weekday: 'short', day: '2-digit', month: 'short' };
@@ -240,10 +234,6 @@ function TimeTracker() {
                 console.log("endHours", endHours)
                 console.log("endMinutes", endMinutes)
 
-                // const formattedTime = new Date(info?.startTime).toLocaleTimeString([], {startHours: '2-digit', startMinutes:'2-digit', startHours12: true});
-                // console.log(formattedTimdifferencee);
-
-                // // Output difference
                 const period = `${startHours}:${startMinutes}${startHours > 12 ? "PM" : "AM"
                   } - ${endHours}:${endMinutes}${startHours > 12 ? "PM" : "AM"
                   }`;
